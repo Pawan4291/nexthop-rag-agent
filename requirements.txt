@@ -1,10 +1,11 @@
 fastapi
 uvicorn
-requests
-beautifulsoup4
 langchain
 langchain-community
 langchain-groq
 langchain-text-splitters
 chromadb
+requests
+beautifulsoup4
+sentence-transformers
 python-dotenv
