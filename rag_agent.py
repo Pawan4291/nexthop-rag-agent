@@ -57,13 +57,17 @@ print("Chunks created:", len(chunks))
 # 3. CREATE VECTOR DATABASE
 # -----------------------------
 
-vectorstore = Chroma.from_documents(
-    chunks
+from langchain_community.vectorstores import Chroma
+from langchain_community.embeddings import HuggingFaceEmbeddings
+
+embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+
+vectorstore = Chroma(
+    persist_directory="db",
+    embedding_function=embeddings
 )
 
 retriever = vectorstore.as_retriever()
-
-print("Vector database ready")
 
 
 # -----------------------------
@@ -136,4 +140,4 @@ Question:
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    uvicorn.run(app, host="0.0.0.0", port=8002)
